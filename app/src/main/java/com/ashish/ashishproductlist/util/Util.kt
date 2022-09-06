@@ -8,8 +8,6 @@ import com.ashish.ashishproductlist.db.DatabaseHelperImpl
 
 class Util {
     companion object {
-        const val PRODUCT_ID: String = ""
-
         fun verifyAvailableNetwork(context: Context): Boolean {
             val connectivityManager =
                 context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

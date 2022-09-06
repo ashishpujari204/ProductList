@@ -1,17 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="small_margin">8dp</dimen>
-    <dimen name="extra_large_margin">100dp</dimen>
     <dimen name="small_padding">8dp</dimen>
     <dimen name="normal_margin">4dp</dimen>
     <dimen name="card_view_corner_radius">10dp</dimen>
     <dimen name="card_view_elevation">5dp</dimen>
     <dimen name="image_size">80dp</dimen>
     <dimen name="image_size_60">60dp</dimen>
-    <dimen name="text_margin">16dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <!-- Default screen margins, per the Android Design guidelines. -->
-    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="dp_60">60dp</dimen>
 </resources>

@@ -14,6 +14,7 @@ import com.ashish.ashishproductlist.db.DatabaseHelperImpl
 import com.ashish.ashishproductlist.db.FavClass
 import com.ashish.ashishproductlist.model.toFavDto
 import com.ashish.ashishproductlist.rest.Status
+import com.ashish.ashishproductlist.util.Constants.Companion.PRODUCT_ID
 import com.ashish.ashishproductlist.util.Util
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -22,16 +23,15 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ProductListFragment : Fragment() {
 
-    lateinit var binding: FragmentProductListBinding
+    private lateinit var binding: FragmentProductListBinding
     private val productListViewModel by viewModel<ProductListViewModel>()
-    lateinit var productAdapter: ProductAdapter
-    lateinit var dbHelper: DatabaseHelperImpl
+    private lateinit var productAdapter: ProductAdapter
+    private lateinit var dbHelper: DatabaseHelperImpl
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        // Inflate the layout for this fragment
         binding = FragmentProductListBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -70,11 +70,11 @@ class ProductListFragment : Fragment() {
                             val favClass = dbHelper.getFav()
                             productAdapter = ProductAdapter(
                                 favClass as ArrayList<FavClass>,
-                                onItemClick = { favClass, _ ->
-                                    goToDetails(favClass)
+                                onItemClick = { favClassObject, _ ->
+                                    goToDetails(favClassObject)
                                 },
-                                onFavImageClick = { favClass, index ->
-                                    updateFavProduct(favClass, index)
+                                onFavImageClick = { favClassObject, index ->
+                                    updateFavProduct(favClassObject, index)
                                 }
                             )
                             binding.productList.adapter = productAdapter
@@ -91,23 +91,16 @@ class ProductListFragment : Fragment() {
     }
 
     private fun updateFavProduct(productDetails: FavClass, index: Int) {
-        if (productDetails.isFav) {
-            productDetails.isFav = false
-            CoroutineScope(Dispatchers.Main).launch {
-                dbHelper.update(productDetails)
-            }
-        } else {
-            productDetails.isFav = true
-            CoroutineScope(Dispatchers.Main).launch {
-                dbHelper.update(productDetails)
-            }
+        productDetails.isFav = !productDetails.isFav
+        CoroutineScope(Dispatchers.Main).launch {
+            dbHelper.update(productDetails)
         }
         productAdapter.notifyItemChanged(index)
     }
 
     private fun goToDetails(productDetails: FavClass) {
         Intent(requireActivity(), ProductDetails::class.java).apply {
-            putExtra(Util.PRODUCT_ID, productDetails.productId)
+            putExtra(PRODUCT_ID, productDetails.productId)
             startActivity(this)
         }
     }
