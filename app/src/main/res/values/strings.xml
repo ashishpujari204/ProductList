@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">AshishProductList</string>
+    <string name="product_name">Name: %s</string>
+    <string name="product_price">Product price: %s</string>
+    <string name="internet">Please check internet connection</string>
+    <string name="title_activity_bottom_navigation">AshishProductApplication</string>
+    <string name="title_home">Product</string>
+    <string name="title_dashboard">Favorites</string>
+</resources>
